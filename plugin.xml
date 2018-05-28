@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+	xmlns:android="http://schemas.android.com/apk/res/android" 
+	id="com.hongyun.cordova.plugin.messagenotify"
+	version="1.0.0">
+
+	<name>messageNotifyPlugin</name>
+
+	<engines>
+		<engine name="cordova" version=">=3.5.0" />
+	</engines>
+
+	
+	<!--web-quote-->
+	<js-module src="www/MessageNotify.js" name="MessageNotify">
+		<clobbers target="navigator.messageNotify" />
+	</js-module>
+
+	<!-- android -->
+	<platform name="android">
+
+
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="MessageNotify">
+				<param name="android-package" value="com.hongyun.cordova.plugin.messagenotify.MessageNotify"/>
+				<param name="onload" value="true" />
+			</feature>
+		</config-file>
+
+
+		<framework src="src/android/messageNotify.gradle" custom="true" type="gradleReference"/>
+		<resource-file src="src/android/libs/org.eclipse.paho.android.service-release.aar" target="libs/org.eclipse.paho.android.service-release.aar"/>
+
+		<!--Active-->
+		<source-file
+			src="src/android/java/com/hongyun/cordova/plugin/messagenotify/MessageNotify.java"
+			target-dir="src/com/hongyun/cordova/plugin/messagenotify/" />
+
+		<source-file
+			src="src/android/java/com/hongyun/cordova/plugin/messagenotify/Notify.java"
+			target-dir="src/com/hongyun/cordova/plugin/messagenotify/" />
+
+	
+<!-- 		<source-file
+			src="src/android/res/values/strings.xml"
+			target-dir="res/values/" /> -->
+
+		<source-file
+			src="src/android/res/raw/hint.mp3"
+			target-dir="res/raw/" />
+
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<service android:name="org.eclipse.paho.android.service.MqttService"></service>
+		</config-file>
+
+
+		<config-file target="AndroidManifest.xml" parent="/*">
+			<uses-permission android:name="android.permission.WAKE_LOCK"/>
+			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+			<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+			<uses-permission android:name="android.permission.INTERNET"/>
+		
+	     </config-file>
+
+	</platform>
+
+
+
+</plugin>

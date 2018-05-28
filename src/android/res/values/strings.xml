@@ -1,0 +1,4 @@
+<resources>
+    <string name="notification">订单编号:%1$s</string>
+    <string name="notifyTitle">程序收到订单</string>
+</resources>
